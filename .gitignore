@@ -31,3 +31,4 @@ _ide_helper.php
 _ide_helper_models.php
 /data.ms
 /storage/rector
+/storage/debugbar
