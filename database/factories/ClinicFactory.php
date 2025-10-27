@@ -24,7 +24,11 @@ class ClinicFactory extends Factory
     {
         return [
             'name' => fake()->company(),
-            'location' => Point::make(fake()->latitude(), fake()->longitude()),
+            'location' => Point::makeGeodetic(
+                fake()->randomFloat(4, -9, -8),
+                fake()->randomFloat(4, -47, -46),
+            ),
+            // 'location' => Point::make(fake()->latitude(), fake()->longitude()),
             'user_id' => User::factory(),
         ];
     }

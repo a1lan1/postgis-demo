@@ -9,6 +9,6 @@ class ClinicSeeder extends Seeder
 {
     public function run(): void
     {
-        Clinic::factory(1000)->create();
+        Clinic::factory(500)->create();
     }
 }
