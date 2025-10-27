@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import { ref, watch, useAttrs } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
+import type { Clinic } from "@/types"
 import Input from '@/components/ui/input/Input.vue'
 
-interface AutocompleteItem {
-  id: number | string
-  name: string
-}
 
 const props = withDefaults(
   defineProps<{
-    search: (query: string) => Promise<AutocompleteItem[]>
+    search: (query: string) => Promise<Clinic[]>
     delay?: number
     minLength?: number
   }>(),
@@ -20,8 +17,13 @@ const props = withDefaults(
   },
 )
 
+const emit = defineEmits<{
+  (e: 'select', payload: Clinic): void
+}>()
+
+
 const searchTerm = ref('')
-const results = ref<AutocompleteItem[]>([])
+const results = ref<Clinic[]>([])
 const isLoading = ref(false)
 const isDropdownOpen = ref(false)
 
@@ -50,9 +52,10 @@ watch(searchTerm, (newQuery) => {
   searchHandler(newQuery)
 })
 
-function selectItem(item: AutocompleteItem) {
+function selectItem(item: Clinic) {
   searchTerm.value = item.name
   isDropdownOpen.value = false
+  emit('select', item)
 }
 </script>
 
@@ -62,7 +65,7 @@ function selectItem(item: AutocompleteItem) {
       v-model="searchTerm"
       v-bind="useAttrs()"
       @focus="isDropdownOpen = results.length > 0"
-      @blur="setTimeout(() => (isDropdownOpen = false), 200)"
+      @blur="isDropdownOpen = false"
     />
 
     <div
