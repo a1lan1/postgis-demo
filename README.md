@@ -39,6 +39,11 @@ This is a PostGIS demo web application. The development environment is fully con
     sail yarn dev
     ```
 
+6. **Run migrations and seed data.**
+    ```bash
+    sail artisan migrate:fresh --seed
+    ```
+
 ## Development Workflow
 
 ### IDE Helper
@@ -64,3 +69,11 @@ sail artisan ide-helper:meta
   sail yarn lint
   sail yarn format
   ```
+
+### Testing
+
+```bash
+sail up -d
+sail shell
+make test
+```
