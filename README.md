@@ -34,14 +34,14 @@ This is a PostGIS demo web application. The development environment is fully con
     CREATE EXTENSION postgis;
     ```
 
-5. **Start the frontend development server.**
-    ```bash
-    sail yarn dev
-    ```
-
-6. **Run migrations and seed data.**
+5. **Run migrations and seed data.**
     ```bash
     sail artisan migrate:fresh --seed
+    ```
+
+6. **Start the frontend development server.**
+    ```bash
+    sail yarn dev
     ```
 
 ## Development Workflow
