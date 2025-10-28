@@ -32,3 +32,7 @@ _ide_helper_models.php
 /data.ms
 /storage/rector
 /storage/debugbar
+/coverage
+coverage.xml
+tests/Browser/Screenshots
+tests/.pest/snapshots
