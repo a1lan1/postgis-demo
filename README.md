@@ -1,4 +1,4 @@
-# Online Auction
+# PostGIS Map
 
 This is a PostGIS demo web application. The development environment is fully containerized using [Docker](https://www.docker.com/products/docker-desktop/) and Laravel Sail.
 
