@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Clinics\CreateClinicAction;
 use App\Contracts\ClinicServiceInterface;
+use App\DTOs\Clinics\CreateClinicDTO;
 use App\Http\Requests\IndexClinicRequest;
 use App\Http\Requests\StoreClinicRequest;
-use App\Models\Clinic;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -32,13 +33,17 @@ class ClinicController extends Controller
         ]);
     }
 
-    public function store(StoreClinicRequest $request): JsonResponse
+    public function store(StoreClinicRequest $request, CreateClinicAction $createClinic): JsonResponse
     {
-        $clinic = Clinic::create(
-            $request->validated()
+        $dto = new CreateClinicDTO(
+            name: $request->validated('name'),
+            location: $request->validated('location'),
+            user: $request->user(),
         );
 
-        return response()->json($clinic);
+        $clinic = $createClinic($dto);
+
+        return response()->json($clinic, 201);
     }
 
     public function autocomplete(Request $request): JsonResponse

@@ -40,7 +40,7 @@ it('creates a new clinic with valid data', function () {
     ];
 
     $this->postJson(route('clinics.store'), $clinicData)
-        ->assertOk()
+        ->assertStatus(201)
         ->assertJsonFragment(['name' => 'St. James Clinic']);
 
     $this->assertDatabaseHas('clinics', [
